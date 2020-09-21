@@ -1,0 +1,138 @@
+#!/usr/bin/env node
+
+//引入导出的app实例。
+const app = require("../app");
+//引入debug模块，打印调试日志。
+const debug = require("debug")("ziyangBlog:server");
+const http = require("http");
+//多进程
+// const cluster = require("cluster");
+// const numCPUs = require("os").cpus().length;
+
+//设置端口号。
+var port = normalizePort(process.env.PORT || "8899");
+app.set("port", port);
+
+//创建http服务
+var server = http.createServer(app);
+
+/**
+ * 将端口规范化为数字、字符串或false。
+ */
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+  // named pipe
+  if (isNaN(port)) return val;
+  // port number
+  if (port >= 0) return port;
+  return false;
+}
+
+/**
+ *  HTTP 服务异常监听.
+ */
+function onError(error) {
+  if (error.syscall !== "listen") throw error;
+
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+
+  // 处理特定的侦听异常错误
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+    default:
+      throw error;
+  }
+}
+
+/**
+ *  HTTP 服务启动事件监听.
+ */
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
+}
+
+//启动工程并监听端口
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+
+// /**
+//  * 进程守护器
+//  */
+// if (cluster.isMaster) {
+//   for (let i = 0; i < require("os").cpus().length / 2; i++) {
+//     createWorker();
+//   }
+
+//   //重启被关闭的进程
+//   cluster.on("exit", function () {
+//     setTimeout(() => {
+//       createWorker();
+//     }, 5000);
+//   });
+
+//   function createWorker() {
+//     // 创建子进程并进行心跳监控
+//     var worker = cluster.fork();
+//     // 没有回应的ping次数
+//     var missed = 0;
+
+//     // 心跳
+//     var timer = setInterval(function () {
+//       // 三次没回应，杀之
+//       if (missed == 3) {
+//         clearInterval(timer);
+//         console.log(worker.process.pid + " has become a zombie!");
+//         process.kill(worker.process.pid);
+//         return;
+//       }
+//       // 开始心跳
+//       missed++;
+//       worker.send("ping#" + worker.process.pid);
+//     }, 10000);
+
+//     worker.on("message", function (msg) {
+//       // 确认心跳回应。
+//       if (msg == "pong#" + worker.process.pid) {
+//         missed--;
+//       }
+//     });
+
+//     // 挂了就没必要再进行心跳了
+//     worker.on("exit", function () {
+//       clearInterval(timer);
+//     });
+//   }
+// } else {
+//   // 当进程出现会崩溃的错误
+//   process.on("uncaughtException", function (err) {
+//     // 这里可以做写日志的操作
+//     console.log(err);
+//     // 退出进程
+//     process.exit(1);
+//   });
+
+//   // 回应心跳信息
+//   process.on("message", function (msg) {
+//     if (msg == "ping#" + process.pid) {
+//       process.send("pong#" + process.pid);
+//     }
+//   });
+
+//   // 内存使用过多，自杀
+//   if (process.memoryUsage().rss > 734003200) {
+//     process.exit(1);
+//   }
+
+//   //启动工程并监听端口
+//   server.listen(port);
+//   server.on("error", onError);
+//   server.on("listening", onListening);
+// }

@@ -1,0 +1,27 @@
+{
+  "name": "ziYangBlog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start bin/www -i 4 --name ziyangBlog --watch",
+    "stop": "pm2 stop ziyangBlog",
+    "reload": "pm2 restart ziyangBlog"
+  },
+  "keywords": [],
+  "author": "ziyang",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "highlight.js": "^10.1.1",
+    "marked": "^1.1.0",
+    "moment": "^2.26.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.13"
+  }
+}
