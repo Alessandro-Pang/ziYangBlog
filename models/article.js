@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-19 12:57:17
- * @LastEditTime: 2020-07-05 23:37:26
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 11:56:53
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\article.js
  */
@@ -16,12 +16,14 @@ const ArticlePageView = require("../models/article_pageview");
 
 const articleconfig = {
   article_id: {
+    field: "id",
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
   article_author_id: {
+    field: "author_id",
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -29,11 +31,23 @@ const articleconfig = {
       key: "user_id",
     },
   },
-  article_title: { type: DataTypes.STRING, allowNull: false },
-  article_intro: { type: DataTypes.STRING, allowNull: false },
-  article_details: { type: DataTypes.TEXT, allowNull: false },
+  article_title: {
+    field: "title",
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  article_intro: {
+    field: "intro",
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  article_details: {
+    field: "content",
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   createdAt: {
-    field: "article_create_date",
+    field: "create_date",
     type: DataTypes.DATE,
     allowNull: false,
     get() {
@@ -50,7 +64,7 @@ const articleconfig = {
     defaultValue: Sequelize.NOW,
   },
   updatedAt: {
-    field: "article_update_date",
+    field: "update_date",
     type: DataTypes.DATE,
     get() {
       return moment(this.getDataValue("updatedAt")).format(
@@ -65,11 +79,15 @@ const articleconfig = {
     },
   },
   tag_name: {
-    field: "article_tag_name",
+    field: "tag_name",
     type: DataTypes.STRING,
     allowNull: false,
   },
-  article_cover: { type: DataTypes.STRING, defaultValue: "" },
+  article_cover: {
+    field: "conver",
+    type: DataTypes.STRING,
+    defaultValue: "",
+  },
 };
 
 const Article = db.define("tb_article", articleconfig, {

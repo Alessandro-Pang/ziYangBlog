@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-19 12:57:17
- * @LastEditTime: 2020-07-01 17:20:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 12:00:48
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\articleInfo.js
  */
@@ -12,18 +12,18 @@ const moment = require("moment");
 const db = require("./db");
 
 const articleInfoConfig = {
-  article_id: { type: DataTypes.INTEGER, primaryKey: true },
-  article_author: { type: DataTypes.STRING },
-  article_author_id: { type: DataTypes.INTEGER },
-  article_title: { type: DataTypes.STRING },
-  article_intro: { type: DataTypes.STRING },
-  article_details: { type: DataTypes.TEXT },
+  article_id: { field: "id", type: DataTypes.INTEGER, primaryKey: true },
+  article_author: { field: "author", type: DataTypes.STRING },
+  article_author_id: { field: "author_id", type: DataTypes.INTEGER },
+  article_title: { field: "title", type: DataTypes.STRING },
+  article_intro: { field: "intro", type: DataTypes.STRING },
+  article_details: { field: "content", type: DataTypes.TEXT },
   tag_name: {
-    field: "article_tag_name",
+    field: "tag_name",
     type: DataTypes.STRING,
   },
   createdAt: {
-    field: "article_create_date",
+    field: "create_date",
     type: DataTypes.DATE,
     get() {
       return moment(this.getDataValue("createdAt")).format(
@@ -32,7 +32,7 @@ const articleInfoConfig = {
     },
   },
   updatedAt: {
-    field: "article_update_date",
+    field: "update_date",
     type: DataTypes.DATE,
     get() {
       return moment(this.getDataValue("updatedAt")).format(
@@ -40,7 +40,7 @@ const articleInfoConfig = {
       );
     },
   },
-  article_cover: { type: DataTypes.STRING },
+  article_cover: { field: "cover", type: DataTypes.STRING },
   pageview: { type: DataTypes.INTEGER },
   likes: { type: DataTypes.INTEGER },
   dislike: { type: DataTypes.INTEGER },

@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-28 22:01:06
- * @LastEditTime: 2020-06-30 10:27:23
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 11:57:46
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\article_likes.js
  */
@@ -13,7 +13,7 @@ const moment = require("moment");
 const Article = require("./article");
 const User = require("./users");
 const articleLikesConfig = {
-  pid: {
+  id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoincrement: true,

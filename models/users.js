@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-18 10:30:12
- * @LastEditTime: 2020-06-30 10:28:02
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 12:02:17
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\users.js
  */
@@ -14,7 +14,7 @@ const encryption = require("../utils/encryption");
 const ep = new encryption();
 
 const userConfig = {
-  user_id: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true

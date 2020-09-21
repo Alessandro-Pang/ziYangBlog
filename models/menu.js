@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-27 19:28:24
- * @LastEditTime: 2020-06-30 10:27:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 12:01:54
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\menu.js
  */
@@ -38,7 +38,6 @@ const menuConfig = {
     },
     defaultValue: Sequelize.Now,
   },
-  create_user_name: { type: DataTypes.STRING, allowNull: false },
   create_user_id: { type: DataTypes.INTEGER, allowNull: false },
   sorting: { type: DataTypes.INTEGER, allowNull: false },
 };

@@ -1,8 +1,8 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-28 22:01:06
- * @LastEditTime: 2020-07-09 18:54:14
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-21 11:57:55
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
  * @FilePath: \ziYangBlog\models\article_pageview.js
  */
@@ -13,7 +13,7 @@ const moment = require("moment");
 const Article = require("./article");
 
 const articlePageViewConfig = {
-  pid: { type: DataTypes.INTEGER, autoincrement: true, primaryKey: true },
+  id: { type: DataTypes.INTEGER, autoincrement: true, primaryKey: true },
   article_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
