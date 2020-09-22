@@ -1,10 +1,10 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-19 13:36:36
- * @LastEditTime: 2020-07-15 00:15:10
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-09-22 00:25:12
+ * @LastEditors: zi.yang
  * @Description: In User Settings Edit
- * @FilePath: \ziYangBlog\services\Article.js
+ * @FilePath: \ziYangBlogBackEnd\services\Article.js
  */
 const { QueryTypes, Op } = require("sequelize");
 const db = require("../models/db");
@@ -186,11 +186,11 @@ exports.findArticleFiling = async (cb) => {
   try {
     const filing = await db.query(
       `SELECT
-        DATE_FORMAT( article_create_date, '%Y-%m' ) AS createdAt,
+        DATE_FORMAT( create_date, '%Y-%m' ) AS createdAt,
         count( 1 ) AS count 
       FROM tb_article 
       GROUP BY
-        DATE_FORMAT( article_create_date, '%Y-%m' ) `,
+        DATE_FORMAT( create_date, '%Y-%m' ) `,
       {
         type: QueryTypes.SELECT,
         raw: true,
@@ -272,7 +272,7 @@ exports.findArticleListByInput = async function (typename, typeValue, cb) {
         `select  
             count( 1 ) AS count 
         from v_article_info 
-        WHERE DATE_FORMAT( article_create_date, '%Y-%m' ) = '${filingDate}'`,
+        WHERE DATE_FORMAT( create_date, '%Y-%m' ) = '${filingDate}'`,
         {
           type: QueryTypes.SELECT,
           raw: true,
@@ -280,16 +280,16 @@ exports.findArticleListByInput = async function (typename, typeValue, cb) {
       )
       filing = await db.query(
         `SELECT
-          article_id,
-          article_author,
-          article_title,
-          article_intro,
-          article_create_date,
-          article_cover,
+          id as article_id,
+          author as article_author,
+          title as article_title,
+          intro as article_intro,
+          create_date as createdAt,
+          cover as article_cover,
           pageview,
           likes
         FROM v_article_info 
-        WHERE DATE_FORMAT( article_create_date, '%Y-%m' ) = '${filingDate}'`,
+        WHERE DATE_FORMAT( create_date, '%Y-%m' ) = '${filingDate}'`,
         {
           type: QueryTypes.SELECT,
           raw: true,

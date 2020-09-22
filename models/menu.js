@@ -1,10 +1,10 @@
 /*
  * @Author: zi.yang
  * @Date: 2020-06-27 19:28:24
- * @LastEditTime: 2020-09-21 12:01:54
+ * @LastEditTime: 2020-09-21 23:16:57
  * @LastEditors: zi.yang
  * @Description: In User Settings Edit
- * @FilePath: \ziYangBlog\models\menu.js
+ * @FilePath: \ziYangBlogBackEnd\models\menu.js
  */
 
 const { Sequelize, DataTypes } = require("sequelize");
@@ -38,7 +38,7 @@ const menuConfig = {
     },
     defaultValue: Sequelize.Now,
   },
-  create_user_id: { type: DataTypes.INTEGER, allowNull: false },
+  create_userid: { type: DataTypes.INTEGER, allowNull: false },
   sorting: { type: DataTypes.INTEGER, allowNull: false },
 };
 
